@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="next&&pre/iconfont.css"/>
+		<script type="text/javascript">
+			window.onload=function(){
+				var img=document.getElementById("img");
+				var circle=document.getElementById("circle");
+				var circleChild=circle.getElementsByTagName("li");
+				var prev=document.getElementById("prev");
+				var next=document.getElementById("next");
+				var p=5,k=0;
+				var clearClass=function(){
+					for(var j=0;j<circleChild.length;j++){
+						circleChild[j].className="";
+					}
+				}
+				var change=function(){
+					p++;
+					if(p==6){p=0;}
+					clearClass();
+					circleChild[p].className="active";
+					img.style.left=-p*880+"px";
+				}
+				var changenoadd=function(){
+					clearClass();
+					img.style.left=-p*880+"px";
+					circleChild[p].className="active";
+				}
+				change();
+				
+				setInterval(function(){
+					if(k==20){k=0;change();}
+					k++;
+				},50)
+				
+				for(var i=0;i<circleChild.length;i++){
+					circleChild[i].addEventListener("mouseenter",function(){
+						k=-200;
+						p=this.getAttribute("data-index");
+						change();
+					})
+					circleChild[i].addEventListener("mouseleave",function(){
+						k=0;
+					})
+				}
+				
+				var prevpic=function(){
+					k=-20;
+					p--;
+					if(p==-1){
+						p=5
+					}
+					changenoadd();
+				}
+				var nextpic=function(){
+					k=-20;
+					p++;
+					if(p==6){
+						p=0;
+					}
+					changenoadd();
+				}
+				prev.addEventListener("click",prevpic);
+				next.addEventListener("click",nextpic);
+			}
+		</script>
+		<style type="text/css">
+			*{
+				padding: 0px;
+				margin: 0px;
+			}
+			html,body{
+				overflow: hidden;
+				height: 100%;
+			}
+			ul{
+				list-style: none;
+			}
+			body{
+				display: flex;
+				align-items: center;
+			}
+			#box{
+				overflow: hidden;
+				height: 495px;
+				width: 880px;
+				margin: 0px auto;
+				position: relative;
+			}
+			#img{
+				position: absolute;
+				width: 5280px;
+				height: 100%;
+				transition: all .7s;
+			}
+			#img li{
+				width: 880px;
+				height: 100%;
+				float: left;
+			}
+			#img li:nth-child(1){
+				background: url(img/小米1.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(2){
+				background: url(img/小米2.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(3){
+				background: url(img/小米3.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(4){
+				background: url(img/小米4.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(5){
+				background: url(img/小米5.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(6){
+				background: url(img/小米6.jpg);
+				background-size: 100% 100%;
+			}
+			#circle{
+				height: 10px;
+				width: 90px;
+				position: absolute;
+				right: 40px;
+				bottom: 30px;
+			}
+			#circle li{
+				box-sizing: border-box;
+				border: 2px solid rgba(255,255,255,0.3);
+				cursor: pointer;
+				height: 10px;
+				width: 10px;
+				border-radius: 5px;
+				background-color: rgba(0,0,0,0.4);
+				float: left;
+				margin-left: 5px;
+			}
+			#circle li:hover{
+				background-color: rgba(255,255,255,0.4);
+				border-color: rgba(0,0,0,0.4);
+			}
+			#prev{
+				cursor: pointer;
+				z-index: 100;
+				position: absolute;
+				width: 50px;
+				height: 95px;
+				background-color: rgba(220,220,220,0.6);
+				font-size: 30px;
+				font-weight: 400;
+				color: skyblue;
+				text-align: center;
+				line-height: 100px;
+				left: 0px;
+				top: 200px;
+				border-radius: 3px;
+			}
+			#next{
+				cursor: pointer;
+				z-index: 100;
+				position: absolute;
+				width: 50px;
+				height: 95px;
+				background-color: rgba(220,220,220,0.6);
+				font-size: 30px;
+				font-weight: 400;
+				color: skyblue;
+				text-align: center;
+				line-height: 100px;
+				right: 0px;
+				top: 200px;
+				border-radius: 3px;
+			}
+			#prev:hover{
+				background-color: rgba(0,0,0,0.4);
+				color: rgba(255,255,255,0.3);
+			}
+			#next:hover{
+				background-color: rgba(0,0,0,0.4);
+				color: rgba(255,255,255,0.3);
+			}
+			.active{
+				background-color: rgba(255,255,255,0.4) !important;
+				border-color: rgba(0,0,0,0.4) !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="prev" class="iconfont icon-prev"></div>
+			<div id="next" class="iconfont icon-next"></div>
+			<ul id="img">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<ul id="circle">
+				<li data-index="5" class="active"></li>
+				<li data-index="0"></li>
+				<li data-index="1"></li>
+				<li data-index="2"></li>
+				<li data-index="3"></li>
+				<li data-index="4"></li>
+			</ul>
+		</div>
+	</body>
+</html>

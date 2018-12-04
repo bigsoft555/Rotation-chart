@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="next&&pre/iconfont.css" />
+		<script type="text/javascript">
+			window.onload=function(){
+				var img=document.getElementById("img");
+				var imgChild=img.getElementsByTagName("li");
+				var circle=document.getElementById("circle");
+				var circleChild=circle.getElementsByTagName("li");
+				var last=document.getElementById("last");
+				var next=document.getElementById("next");
+				var p=0,k=0;
+				var clearClass=function(){
+					for(var j=0;j<circleChild.length;j++){
+						imgChild[j].className="";
+						circleChild[j].className="";
+					}
+				}
+				var change=function(){
+					p++;
+					if(p==6){p=0;}
+					clearClass();
+					imgChild[p].className="opacity";
+					circleChild[p].className="active";
+				}
+				var changenoadd=function(){
+					clearClass();
+					imgChild[p].className="opacity";
+					circleChild[p].className="active";
+				}
+				setInterval(function(){
+					if(k==20){k=0;change();}
+					k++;
+				},50)
+				for(var i=0;i<circleChild.length;i++){
+					circleChild[i].addEventListener("click",function(){
+						k=-20;
+						p=this.getAttribute("data-index")-1;
+						changenoadd();
+					})
+				}
+				var lastpic=function(){
+					k=-20;
+					p--;
+					if(p==-1){
+						p=5
+					}
+					changenoadd();
+				}
+				var nextpic=function(){
+					k=-20;
+					p++;
+					if(p==6){
+						p=0;
+					}
+					changenoadd();
+				}
+				last.addEventListener("click",lastpic);
+				next.addEventListener("click",nextpic);
+			}
+		</script>
+		<style type="text/css">
+			*{
+				padding: 0px;
+				margin: 0px;
+			}
+			html,body{
+				height: 100%;
+			}
+			ul{
+				list-style: none;
+			}
+			body{
+				display: flex;
+				align-items: center;
+			}
+			#box{
+				height: 495px;
+				width: 880px;
+				margin: 0px auto;
+				position: relative;
+			}
+			#img{
+				width: 100%;
+				height: 100%;
+			}
+			#img li{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				opacity: 0;
+				transition: all .5s;
+			}
+			#img li:nth-child(1){
+				background: url(img/小米1.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(2){
+				background: url(img/小米2.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(3){
+				background: url(img/小米3.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(4){
+				background: url(img/小米4.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(5){
+				background: url(img/小米5.jpg);
+				background-size: 100% 100%;
+			}
+			#img li:nth-child(6){
+				background: url(img/小米6.jpg);
+				background-size: 100% 100%;
+			}
+			#circle{
+				height: 10px;
+				width: 90px;
+				position: absolute;
+				right: 40px;
+				bottom: 30px;
+			}
+			#circle li{
+				box-sizing: border-box;
+				border: 2px solid rgba(255,255,255,0.3);
+				cursor: pointer;
+				height: 10px;
+				width: 10px;
+				border-radius: 5px;
+				background-color: rgba(0,0,0,0.4);
+				float: left;
+				margin-left: 5px;
+			}
+			#circle li:hover{
+				background-color: rgba(255,255,255,0.4);
+				border-color: rgba(0,0,0,0.4);
+			}
+			#last{
+				cursor: pointer;
+				z-index: 100;
+				position: absolute;
+				width: 50px;
+				height: 95px;
+				background-color: rgba(220,220,220,0.6);
+				font-size: 30px;
+				font-weight: 400;
+				color: skyblue;
+				text-align: center;
+				line-height: 100px;
+				left: 0px;
+				top: 200px;
+				border-radius: 3px;
+			}
+			#next{
+				cursor: pointer;
+				z-index: 100;
+				position: absolute;
+				width: 50px;
+				height: 95px;
+				background-color: rgba(220,220,220,0.6);
+				font-size: 30px;
+				font-weight: 400;
+				color: skyblue;
+				text-align: center;
+				line-height: 100px;
+				right: 0px;
+				top: 200px;
+				border-radius: 3px;
+			}
+			#last:hover{
+				background-color: rgba(0,0,0,0.4);
+				color: rgba(255,255,255,0.3);
+			}
+			#next:hover{
+				background-color: rgba(0,0,0,0.4);
+				color: rgba(255,255,255,0.3);
+			}
+			.active{
+				background-color: rgba(255,255,255,0.4) !important;
+				border-color: rgba(0,0,0,0.4) !important;
+			}
+			.opacity{
+				opacity: 1 !important;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="last" class="iconfont icon-prev"></div>
+			<div id="next" class="iconfont icon-next"></div>
+			<ul id="img">
+				<li class="opacity"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<ul id="circle">
+				<li data-index="1" class="active"></li>
+				<li data-index="2"></li>
+				<li data-index="3"></li>
+				<li data-index="4"></li>
+				<li data-index="5"></li>
+				<li data-index="6"></li>
+			</ul>
+		</div>
+	</body>
+</html>
